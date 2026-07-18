@@ -11,8 +11,9 @@
     //"module": "nodenext",
     //"target": "esnext",
     //prisma
-    "module": "ESNext",
-    "moduleResolution": "bundler",
+    "module": "NodeNext",
+    //"moduleResolution": "bundler",
+    "moduleResolution": "NodeNext",
     "target": "ES2023",
     "esModuleInterop": true,
     "ignoreDeprecations": "6.0",
@@ -47,5 +48,11 @@
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
     "skipLibCheck": true,
+    "paths": { 
+      "@/*": [
+        "./src/*"
+      ],
+      "include": ["./src/routes/*"]
+    },
   }
 }

@@ -1,5 +1,5 @@
 import { connect } from "node:http2";
-import { prisma } from "./lib/prisma";
+import { prisma } from "./lib/prisma.js";
 
 async function main() {
     const category = await prisma.categories.create({

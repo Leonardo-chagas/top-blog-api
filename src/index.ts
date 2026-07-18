@@ -1,8 +1,8 @@
 import express from 'express'
-import usersRouter from './routes/users';
-import categoriesRouter from './routes/categories';
-import postsRouter from './routes/posts';
-import  commentsRouter from './routes/comments'
+import usersRouter from './routes/users.js';
+import categoriesRouter from './routes/categories.js';
+import postsRouter from './routes/posts.js';
+import  commentsRouter from './routes/comments.js'
 
 const app = express();
 
