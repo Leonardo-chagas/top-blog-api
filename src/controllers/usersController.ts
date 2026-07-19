@@ -18,7 +18,7 @@ export async function getUserById(req:Request, res:Response) {
 }
 
 export async function postUser(req:Request, res:Response) {
-    const {username, password} = req.query;
+    const {username, password} = req.body;
     
     if(typeof username === 'string' && typeof password === 'string'){
         console.log('passou')

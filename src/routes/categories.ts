@@ -1,11 +1,13 @@
 import { Router } from "express";
-import { getCategories, getCategoryById, postCategory, putCategory, deleteCategory } from "../controllers/categoriesController.js";
+import { getCategories, getCategoryById, getCategoryByName, postCategory, putCategory, deleteCategory } from "../controllers/categoriesController.js";
 
 const categoriesRouter = Router();
 
 categoriesRouter.get('/', getCategories);
 
 categoriesRouter.get('/:categoryId', getCategoryById);
+
+categoriesRouter.get('/name/:category', getCategoryByName);
 
 categoriesRouter.post('/', postCategory);
 
