@@ -1,9 +1,11 @@
 import { Router } from "express";
-import { getComments, postComment, putComment, deleteComment } from "../controllers/commentsController.js";
+import { getComments, getCommentsFromPost, postComment, putComment, deleteComment } from "../controllers/commentsController.js";
 
 const commentsRouter = Router();
 
-commentsRouter.get('/:postId', getComments);
+commentsRouter.get('/', getComments);
+
+commentsRouter.get('/:postId', getCommentsFromPost);
 
 commentsRouter.post('/:postId/:userId', postComment);
 
