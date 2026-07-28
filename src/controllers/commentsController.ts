@@ -44,23 +44,31 @@ export async function postComment(req:Request, res:Response){
 export async function putComment(req:Request, res:Response){
     const id = `${req.params.commentId}`;
     const text = req.body.text;
-    const comment = await prisma.comments.update({
+    const comment = await prisma.comments.findUnique({
+        where: {id: parseInt(id)}
+    });
+    if(comment.username != req.user?.username) return res.status(403).json({message: "This comment belongs to a different user, so it can't be edited"})
+    const newComment = await prisma.comments.update({
         where: {id: parseInt(id)},
         data: {
             text: text
         }
     });
-    const json = JSON.stringify(comment);
+    const json = JSON.stringify(newComment);
     res.json(json);
 }
 
 export async function deleteComment(req:Request, res:Response){
     const id = `${req.params.commentId}`;
-    const comment = await prisma.comments.delete({
+    const comment = await prisma.comments.findUnique({
+        where: {id: parseInt(id)}
+    });
+    if(comment.username != req.user?.username) return res.status(403).json({message: "This comment belongs to a different user, so it can't be deleted"})
+    const newComment = await prisma.comments.delete({
         where: {
             id: parseInt(id)
         }
     });
-    const json = JSON.stringify(comment);
+    const json = JSON.stringify(newComment);
     res.json(json);
 }

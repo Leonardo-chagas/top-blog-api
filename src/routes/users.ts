@@ -1,5 +1,6 @@
 import { Router } from "express";
 import {getUsers, getUserById, postUser, deleteUser} from "../controllers/usersController.js"
+import passport from '../strategies/jwt.js';
 
 const usersRouter = Router();
 

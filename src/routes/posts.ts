@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { getPosts, getPostById, getPostsByCategory, postPost, putPost, deletePost } from "../controllers/postsController.js";
+import passport from '../strategies/jwt.js';
 
 const postsRouter = Router();
 
@@ -9,10 +10,10 @@ postsRouter.get('/:categoryId', getPostsByCategory);
 
 postsRouter.get('/view/:postId', getPostById);
 
-postsRouter.post('/', postPost);
+postsRouter.post('/', passport.authenticate('jwt', {session: false}), postPost);
 
-postsRouter.put('/:postId', putPost);
+postsRouter.put('/:postId', passport.authenticate('jwt', {session: false}), putPost);
 
-postsRouter.delete('/:postId', deletePost);
+postsRouter.delete('/:postId', passport.authenticate('jwt', {session: false}), deletePost);
 
 export default postsRouter;
