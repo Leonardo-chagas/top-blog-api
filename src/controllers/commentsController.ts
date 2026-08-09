@@ -3,10 +3,6 @@ import {prisma} from '../../lib/prisma.js';
 
 export async function getComments(req:Request, res:Response){
     const comments = await prisma.comments.findMany({
-        include: {
-            user: true,
-            post: true
-        }
     });
     const json = JSON.stringify(comments);
     res.json(json);
@@ -15,10 +11,7 @@ export async function getComments(req:Request, res:Response){
 export async function getCommentsFromPost(req:Request, res:Response){
     const postId = `${req.params.postId}`;
     const comments = await prisma.comments.findMany({
-        where: {postId: parseInt(postId)},
-        include: {
-            user: true,
-        }
+        where: {postId: parseInt(postId)}
     });
     const json = JSON.stringify(comments);
     res.json(json);

@@ -3,10 +3,6 @@ import {prisma} from '../../lib/prisma.js';
 
 export async function getPosts(req:Request, res:Response){
     const posts = await prisma.posts.findMany({
-        //relationLoadStrategy: "join", // or 'query'
-    include: {
-        category: true,
-    },
     });
     const json = JSON.stringify(posts);
     res.json(json);
@@ -15,10 +11,7 @@ export async function getPosts(req:Request, res:Response){
 export async function getPostById(req:Request, res:Response){
     const id = `${req.params.postId}`;
     const post = await prisma.posts.findUnique({
-        where: {id: parseInt(id)},
-        include: {
-            category: true
-        }
+        where: {id: parseInt(id)}
     });
     const json = JSON.stringify(post);
     res.json(json);
@@ -27,10 +20,7 @@ export async function getPostById(req:Request, res:Response){
 export async function getPostsByCategory(req:Request, res:Response){
     const id = `${req.params.categoryId}`;
     const posts = await prisma.posts.findMany({
-        where: {categoryId: parseInt(id)},
-        include: {
-            category: true
-        }
+        where: {categoryId: parseInt(id)}
     });
     const json = JSON.stringify(posts);
     res.json(json);
