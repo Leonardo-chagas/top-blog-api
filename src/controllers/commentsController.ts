@@ -2,6 +2,7 @@ import type { Request, Response } from "express";
 import {prisma} from '../../lib/prisma.js';
 
 export async function getComments(req:Request, res:Response){
+    res.header("Access-Control-Allow-Origin", "*");
     const comments = await prisma.comments.findMany({
     });
     const json = JSON.stringify(comments);
@@ -9,6 +10,7 @@ export async function getComments(req:Request, res:Response){
 }
 
 export async function getCommentsFromPost(req:Request, res:Response){
+    res.header("Access-Control-Allow-Origin", "*");
     const postId = `${req.params.postId}`;
     const comments = await prisma.comments.findMany({
         where: {postId: parseInt(postId)}
@@ -18,6 +20,7 @@ export async function getCommentsFromPost(req:Request, res:Response){
 }
 
 export async function postComment(req:Request, res:Response){
+    res.header("Access-Control-Allow-Origin", "*");
     const userId = `${req.params.userId}`;
     const postId = `${req.params.postId}`;
     const {text, username} = req.body;
@@ -35,6 +38,7 @@ export async function postComment(req:Request, res:Response){
 }
 
 export async function putComment(req:Request, res:Response){
+    res.header("Access-Control-Allow-Origin", "*");
     const id = `${req.params.commentId}`;
     const text = req.body.text;
     const comment = await prisma.comments.findUnique({
@@ -52,6 +56,7 @@ export async function putComment(req:Request, res:Response){
 }
 
 export async function deleteComment(req:Request, res:Response){
+    res.header("Access-Control-Allow-Origin", "*");
     const id = `${req.params.commentId}`;
     const comment = await prisma.comments.findUnique({
         where: {id: parseInt(id)}

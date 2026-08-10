@@ -3,12 +3,14 @@ import {prisma} from '../../lib/prisma.js';
 import bcrypt from 'bcrypt';
 
 export async function getUsers(req:Request, res:Response) {
+    res.header("Access-Control-Allow-Origin", "*");
     const users = await prisma.users.findMany();
     const json = JSON.stringify(users);
     res.json(json);
 }
 
 export async function getUserById(req:Request, res:Response) {
+    res.header("Access-Control-Allow-Origin", "*");
     const id = `${req.params.userId}`;
     const user = await prisma.users.findUnique({
         where:{id: parseInt(id)}
@@ -18,6 +20,7 @@ export async function getUserById(req:Request, res:Response) {
 }
 
 export async function postUser(req:Request, res:Response) {
+    res.header("Access-Control-Allow-Origin", "*");
     const {username, password} = req.body;
     
     if(typeof username === 'string' && typeof password === 'string'){
@@ -37,6 +40,7 @@ export async function postUser(req:Request, res:Response) {
 }
 
 export async function deleteUser(req:Request, res:Response) {
+    res.header("Access-Control-Allow-Origin", "*");
     const id = `${req.params.userId}`;
     const user = await prisma.users.delete({
         where: {id: parseInt(id)}
