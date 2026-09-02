@@ -8,6 +8,7 @@ const loginRouter = Router();
 
 loginRouter.post('/', async (req: Request, res: Response) => {
     const {username, password} = req.body;
+    console.log('passando');
     const user = await prisma.users.findUnique({
         where: {username: username}
     })
@@ -20,7 +21,8 @@ loginRouter.post('/', async (req: Request, res: Response) => {
             console.log(token);
             return res.status(200).json({
                 message: 'Auth passed',
-                token
+                token,
+                userId: user.id
             })
         }
     }
