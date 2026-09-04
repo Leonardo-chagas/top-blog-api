@@ -2,6 +2,7 @@ import { Router } from "express";
 import type { Request, Response } from "express";
 import {prisma} from '../../lib/prisma.js';
 import jwt from "jsonwebtoken";
+import { setCookie } from "../../lib/utils/cookie.js";
 import bcrypt from 'bcrypt';
 
 const loginRouter = Router();
@@ -15,6 +16,7 @@ loginRouter.post('/', async (req: Request, res: Response) => {
     if(user){
         const match = await bcrypt.compare(password, user.password);
         if(match){
+            setCookie(res, username)
             const opts = {expiresIn: 1800};
             const secret = process.env.SECRET_KEY || 'fallback';
             const token = jwt.sign({username}, secret, opts)

@@ -4,6 +4,7 @@ import categoriesRouter from './routes/categories.js';
 import postsRouter from './routes/posts.js';
 import  commentsRouter from './routes/comments.js'
 import loginRouter from './routes/login.js';
+import refreshRouter from './routes/refresh.js';
 import cors from 'cors';
 
 const app = express();
@@ -12,6 +13,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use('/login', loginRouter);
+app.use('/refresh', refreshRouter);
 app.use('/users', usersRouter);
 app.use('/categories', categoriesRouter);
 app.use('/posts', postsRouter);
