@@ -1,11 +1,18 @@
 import { ExtractJwt, Strategy as JwtStrategy, type StrategyOptions } from "passport-jwt";
 import {prisma} from '../../lib/prisma.js';
 import passport from "passport";
+import type { JwtPayload } from "jsonwebtoken";
 
-export interface JwtPayload {
-    username: string;
-    iat?: number;
-    exp?: number;
+//export interface JwtPayload {
+//    username: string;
+//    iat?: number;
+//    exp?: number;
+//}
+
+declare module "jsonwebtoken" {
+    export interface JwtPayload {
+        username: string;
+    }
 }
 
 const options: StrategyOptions = {
